@@ -1,0 +1,33 @@
+.pokemon-card {
+background-color: #ffffff;
+border-radius: 16px;
+padding: 1.5rem;
+width: 220px;
+text-align: center;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+cursor: pointer;
+}
+.pokemon-card:hover {
+transform: translateY(-6px);
+box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.perfil-skills {
+    list-style: nome;
+    padding: 0;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+}
+.skill-badge {
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.25rem 0.75;
+    border-radius: 12px;
+    background-color: #e2e8f0;
+    color: #334155;
+}
+.type-fogo { background-color: #ff421d; color: #ffffff; }
+.type-agua { background-color: #268bf7; color: #ffffff; }
+.type-planta { background-color: #57b952; color: #ffffff; }
+.type-eletrico { background-color: #fbc02d; color: #333333; }
