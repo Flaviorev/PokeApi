@@ -1,47 +1,55 @@
-import { useState } from 'react';
-import './PokemonCard.css';
+import "./PokemonCard.css";
 
-export function Pokemoncard({ pokemon, onCardClick }) {
-    const [showInfo, setShowInfo] = useState(false);
+/**
+ * Recebe o objeto inteiro `pokemon` (como está no seu App.jsx) e a função
+ * `onCardClick` para abrir o modal de detalhes.
+ *
+ * pokemon: { id, name, types, image, height, weight, ability }
+ */
+export default function PokemonCard({ pokemon, onCardClick }) {
+  const { id, name, types, image, height, weight, ability } = pokemon;
+  const paddedId = String(id).padStart(3, "0");
 
-    return (
-        <article
-            className="Pokedex-card"
-            onClick={() => onCardClick(pokemon)}
-        >
-            <header className="Pokedex-card-header">
-                <span className="perfil-cabecalho">
-                    #{String(pokemon.id).padStart(3, '0')}
-                </span>
-                <h2 className="perfil-id">{pokemon.name}</h2>
-                <p className="perfil-tipo">{pokemon.types.join(' / ')}</p>
-            </header>
-            <figure
-             className="Perfil-foto-conteiner"
-            onMouseEnter={(e) => { e.stopPropagation(); setShowInfo(true); }}
-                onMouseLeave={(e) => { e.stopPropagation(); setShowInfo(false); }}
-    onClick={() => onCardClick(pokemon)}
->
-            
-                <img
-                    src={pokemon.image}
-                    alt={`Imagem do Pokémon ${pokemon.name}`}
-                    className="Perfil-foto"
-                />
+  return (
+    <div className="pokemon-card" onClick={() => onCardClick && onCardClick(pokemon)}>
+      <div className="pokemon-card-inner">
+        {/* FRENTE */}
+        <div className="pokemon-card-front">
+          <span className="pokemon-id">#{paddedId}</span>
+          <img className="pokemon-image" src={image} alt={name} />
+          <h3 className="pokemon-name">{name}</h3>
+          <div className="pokemon-types">
+            {types.map((type) => (
+              <span key={type} className={`type-badge type-${type.toLowerCase()}`}>
+                {type.toUpperCase()}
+              </span>
+            ))}
+          </div>
+        </div>
 
-                {showInfo && (
-                    <div className="perfil-tooltip">
-                        <p><strong>Altura:</strong> {pokemon.height} m</p>
-                        <p><strong>Peso:</strong> {pokemon.weight} kg</p>
-                        <p><strong>Habilidade:</strong> {pokemon.ability}</p>
-                    </div>
-                )}
-            </figure>
-
-            <ul className="perfil-skills">
-                <li className="skill-badge skill-react">React</li>
-                <li className="skill-badge skill-css">CSS</li>
-            </ul>
-        </article>
-    );
+        {/* VERSO (aparece ao passar o mouse) */}
+        <div className="pokemon-card-back">
+          <h3 className="pokemon-name">{name}</h3>
+          <ul className="pokemon-stats">
+            <li>
+              <span>Altura</span>
+              <span className="stat-value">{height} m</span>
+            </li>
+            <li>
+              <span>Peso</span>
+              <span className="stat-value">{weight} kg</span>
+            </li>
+            <li>
+              <span>Habilidade</span>
+              <span className="stat-value">{ability}</span>
+            </li>
+            <li>
+              <span>Tipo</span>
+              <span className="stat-value">{types.join(" / ")}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
 }

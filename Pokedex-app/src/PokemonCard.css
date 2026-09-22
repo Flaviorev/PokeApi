@@ -1,33 +1,147 @@
 .pokemon-card {
-background-color: #ffffff;
-border-radius: 16px;
-padding: 1.5rem;
-width: 220px;
-text-align: center;
-box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-transition: transform 0.2s ease, box-shadow 0.2s ease;
-cursor: pointer;
+  width: 260px;
+  height: 360px;
+  perspective: 1200px; /* dá profundidade ao efeito 3D */
+  margin: 1rem auto;
+  cursor: pointer;
 }
-.pokemon-card:hover {
-transform: translateY(-6px);
-box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+
+.pokemon-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-.perfil-skills {
-    list-style: nome;
-    padding: 0;
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
+
+/* aqui acontece o giro ao passar o mouse */
+.pokemon-card:hover .pokemon-card-inner {
+  transform: rotateY(180deg);
 }
-.skill-badge {
-    font-size: 0.75rem;
-    font-weight: bold;
-    padding: 0.25rem 0.75;
-    border-radius: 12px;
-    background-color: #e2e8f0;
-    color: #334155;
+
+.pokemon-card-front,
+.pokemon-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
 }
-.type-fogo { background-color: #ff421d; color: #ffffff; }
-.type-agua { background-color: #268bf7; color: #ffffff; }
-.type-planta { background-color: #57b952; color: #ffffff; }
-.type-eletrico { background-color: #fbc02d; color: #333333; }
+
+.pokemon-card-front {
+  background: linear-gradient(160deg, #fff 0%, #f2f2f2 100%);
+  border: 2px solid #e0e0e0;
+}
+
+.pokemon-card-back {
+  background: linear-gradient(160deg, #2b2b40 0%, #1a1a2e 100%);
+  color: #fff;
+  transform: rotateY(180deg);
+  justify-content: center;
+}
+
+.pokemon-id {
+  align-self: flex-start;
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 600;
+}
+
+.pokemon-image {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+  margin: 0.5rem 0;
+}
+
+.pokemon-name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0.3rem 0;
+  text-transform: capitalize;
+}
+
+.pokemon-types {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 0.4rem;
+}
+
+.type-badge {
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.5px;
+}
+
+/* cores por tipo — adicione outros tipos conforme precisar */
+.type-grass { background: #78c850; }
+.type-poison { background: #a040a0; }
+.type-fire { background: #f08030; }
+.type-water { background: #6890f0; }
+.type-electric { background: #f8d030; color: #333; }
+.type-bug { background: #a8b820; }
+.type-normal { background: #a8a878; }
+.type-flying { background: #a890f0; }
+.type-ground { background: #e0c068; }
+.type-fairy { background: #ee99ac; }
+.type-psychic { background: #f85888; }
+.type-rock { background: #b8a038; }
+.type-ghost { background: #705898; }
+.type-ice { background: #98d8d8; color: #333; }
+.type-dragon { background: #7038f8; }
+.type-dark { background: #705848; }
+.type-steel { background: #b8b8d0; color: #333; }
+.type-fighting { background: #c03028; }
+
+.pokemon-stats {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 90%;
+}
+
+.pokemon-stats li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  margin: 0.6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.4rem;
+}
+
+.pokemon-stats li span:first-child {
+  text-align: left;
+  text-transform: uppercase;
+  font-size: 0.65rem;
+  color: #ccc;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  text-align: right;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+/* grid para exibir vários cards lado a lado, se ainda não tiver um */
+.pokemon-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
